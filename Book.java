@@ -31,7 +31,6 @@ public class Book {
     public long getPrice() { return price; }
     public void setPrice(long price) { this.price = price; }
 
-    // Hàm nhập thông tin (Giống hình 7)
     public void input() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhập mã sách: ");
@@ -47,7 +46,6 @@ public class Book {
         this.price = Long.parseLong(scanner.nextLine());
     }
 
-    // Hàm xuất thông tin dùng Text Block và formatted (Giống hình 8)
     public void output() {
         String msg = """
                      BOOK: id= %d, title= %s, author= %s, price= %d

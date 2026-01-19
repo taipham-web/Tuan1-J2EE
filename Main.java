@@ -26,7 +26,6 @@ public class Main {
                 chon = -1; // Xử lý nếu nhập chữ thay vì số
             }
 
-            // Switch Expression (Java 14+)
             switch (chon) {
                 case 1 -> {
                     System.out.println("--- Thêm sách mới ---");
@@ -39,7 +38,6 @@ public class Main {
                 case 2 -> {
                     System.out.print("Nhập ID sách cần xóa: ");
                     int idDel = Integer.parseInt(scanner.nextLine());
-                    // Dùng removeIf của Collection (ngắn gọn hơn Stream remove)
                     boolean removed = listBook.removeIf(b -> b.getId() == idDel);
                     if (removed) System.out.println("Đã xóa sách có ID " + idDel);
                     else System.out.println("Không tìm thấy ID này.");
@@ -48,7 +46,6 @@ public class Main {
                 case 3 -> {
                     System.out.print("Nhập ID sách cần sửa: ");
                     int idEdit = Integer.parseInt(scanner.nextLine());
-                    // Tìm sách đầu tiên khớp ID
                     Book bookToEdit = listBook.stream()
                             .filter(b -> b.getId() == idEdit)
                             .findFirst()
@@ -56,11 +53,9 @@ public class Main {
 
                     if (bookToEdit != null) {
                         System.out.println("Nhập thông tin mới (ID giữ nguyên):");
-                        // Gọi lại hàm input để nhập đè thông tin mới
-                        // Lưu ý: Nếu muốn giữ ID cũ thì cần set lại ID sau khi input
                         int oldId = bookToEdit.getId(); 
                         bookToEdit.input();
-                        bookToEdit.setId(oldId); // Đảm bảo ID không bị đổi nếu không muốn
+                        bookToEdit.setId(oldId);
                         System.out.println("Cập nhật thành công!");
                     } else {
                         System.out.println("Không tìm thấy sách!");
@@ -74,7 +69,7 @@ public class Main {
                 }
 
                 case 5 -> {
-                    // Tìm sách có chữ "Lập trình" (không phân biệt hoa thường)
+                    
                     System.out.println("--- Sách Lập Trình ---");
                     listBook.stream()
                             .filter(b -> b.getTitle().toLowerCase().contains("lập trình"))
@@ -82,7 +77,7 @@ public class Main {
                 }
 
                 case 6 -> {
-                    // Yêu cầu 6: Lấy K cuốn có giá <= P
+                    
                     System.out.print("Nhập số lượng K cần lấy: ");
                     int k = Integer.parseInt(scanner.nextLine());
                     System.out.print("Nhập mức giá trần P: ");
@@ -96,10 +91,8 @@ public class Main {
                 }
 
                 case 7 -> {
-                    // Yêu cầu 7: Tìm theo danh sách tác giả nhập vào
                     System.out.print("Nhập các tác giả (cách nhau bởi dấu phẩy): ");
                     String inputAuthors = scanner.nextLine();
-                    // Chuyển chuỗi nhập vào thành List các tên tác giả, xóa khoảng trắng thừa
                     List<String> targetAuthors = Arrays.stream(inputAuthors.split(","))
                             .map(String::trim)
                             .map(String::toLowerCase)
